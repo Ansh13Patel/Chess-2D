@@ -12,6 +12,8 @@ public class pawns : playerinfo
     {
         bool[,] r = new bool[80, 80];
         playerinfo p, p1;
+        int[] e = GameManager.boardmanager.enpassent;
+
         if (iswhite)
         {
            
@@ -43,6 +45,10 @@ public class pawns : playerinfo
             // diagonal right
             if (currentx != 70 && currenty != 70)
             {
+                if(currentx +10 == e[0] && currenty+10 == e[1])
+                {
+                    r[currentx + 10, currenty + 10] = true;
+                }
                 p = GameManager.boardmanager.playerinfo[currentx + 10, currenty + 10];
                 if (p != null && p.iswhite == false)
                 {
@@ -53,6 +59,10 @@ public class pawns : playerinfo
             //diagonal left
             if (currentx != 0 && currenty != 70)
             {
+                if (currentx - 10 == e[0] && currenty + 10 == e[1])
+                {
+                    r[currentx - 10, currenty + 10] = true;
+                }
                 p = GameManager.boardmanager.playerinfo[currentx - 10, currenty + 10];
                 if (p != null && p.iswhite == false)
                 {
@@ -69,9 +79,12 @@ public class pawns : playerinfo
             {
                 p = GameManager.boardmanager.playerinfo[currentx, currenty - 10];
                 p1 = GameManager.boardmanager.playerinfo[currentx, currenty - 20];
-                if (p == null && p1 == null)
+                if (p == null)
                 {
                     r[currentx, currenty - 10] = true;
+                }
+                if (p1 == null)
+                {
                     r[currentx, currenty - 20] = true;
                 }
             }
@@ -89,6 +102,10 @@ public class pawns : playerinfo
             // diagonal right
             if (currentx != 0 && currenty != 0)
             {
+                if (currentx - 10 == e[0] && currenty - 10 == e[1])
+                {
+                    r[currentx - 10, currenty - 10] = true;
+                }
                 p = GameManager.boardmanager.playerinfo[currentx - 10, currenty - 10];
                 if (p != null && p.iswhite == true)
                 {
@@ -99,6 +116,10 @@ public class pawns : playerinfo
             //diagonal left
             if (currentx != 70 && currenty != 0)
             {
+                if (currentx + 10 == e[0] && currenty - 10 == e[1])
+                {
+                    r[currentx + 10, currenty - 10] = true;
+                }
                 p = GameManager.boardmanager.playerinfo[currentx + 10, currenty - 10];
                 if (p != null && p.iswhite == true)
                 {
